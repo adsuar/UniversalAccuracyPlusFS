@@ -99,16 +99,16 @@ printDiagnosticAccuracyData <- function() {
 }
 
 analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
-   n <- classPosition + sizeOfMeasures
+   n <- class.position + sizeOfMeasures
    
    if(sizeOfMeasures <= 0) n <- dim(dataset.merged)[2]
    
    # 1) Train Classifier
-   generateClassifier(dataset.train[,classPosition:n],1,kfold.crossvalidation)
+   generateClassifier(dataset.train[,class.position:n],1,kfold.crossvalidation)
    # 2) Execute the clasification
    result <- classifyEntries(trainer,dataset.test[,sampleInformationPosition:n])
    # 3) Generate the diagnostic accuracy data
-   generateDiagnosticAccuracyData(result,dataset.test[,classPosition])
+   generateDiagnosticAccuracyData(result,dataset.test[,class.position])
    # 4) Print the results
    if(analysis == 0) {
       printDiagnosticAccuracyData()

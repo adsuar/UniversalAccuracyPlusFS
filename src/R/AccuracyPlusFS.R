@@ -60,5 +60,7 @@ printMessages <- printMessagesOld
 printMessage("The accuracy of the different measurements is:\n\n")
 printMatrix(accuracyMeasurements)
 
+#Third Step -- Calculate Sensitivity, Specifitivity, PPV and NPV for Gender, Age, Histology and Stage
+
 # We restore the current folder to the previous one
 setwd(initial.folder)

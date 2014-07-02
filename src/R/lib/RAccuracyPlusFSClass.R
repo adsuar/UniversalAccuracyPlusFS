@@ -78,18 +78,21 @@ generateDiagnosticAccuracyData <- function(prediction,reference) {
    
    accuracyData <- confusionMatrix(prediction,reference)
    
+   nData <- class.size*4
+   
    assign("diagnosticAccuracy.data",accuracyData,envir = .GlobalEnv)
-   assign("diagnosticAccuracy.matrix",matrix(accuracyData$byClass[1:12],nrow=3,ncol=4),envir = .GlobalEnv)
+   assign("diagnosticAccuracy.matrix",matrix(accuracyData$byClass[1:nData],nrow=class.size,ncol=4),envir = .GlobalEnv)
    assign("diagnosticAccuracy.accuracy",accuracyData$overall[[1]],envir = .GlobalEnv)
 }
 
+# Function that will print the diagnostic accuracy data
 printDiagnosticAccuracyData <- function() {
    printMessage ("\n\nDIAGNOSTIC ACCURACY DATA\n")
    printMessage ("========================\n\n")
    
    printMessage("\tThe accuracy of the prediction model is: ",diagnosticAccuracy.accuracy,"\n")
    
-   for(i in 1:3) {
+   for(i in 1:class.size) {
       printMessage("\tClass ",i-1,":\n")
       printMessage("\t\tSensitivity: ",diagnosticAccuracy.matrix[i,1],"\n")
       printMessage("\t\tSpecificity: ",diagnosticAccuracy.matrix[i,2],"\n")
@@ -98,6 +101,8 @@ printDiagnosticAccuracyData <- function() {
    }
 }
 
+# Function that will execute a certain analysis of the accuracy of a given
+# environment
 analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
    n <- class.position + sizeOfMeasures
    

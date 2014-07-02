@@ -38,6 +38,8 @@ kfold.crossvalidation <- 0
 class.position <- 9
 # Position at which the sample information starts.
 sampleInformationPosition <- 10
+# Different classes
+class.size <- 3
 
 # PRINT CONFUGURATION
 printMessages <- TRUE

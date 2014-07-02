@@ -1,0 +1,3 @@
+We modified files so our R routines can work with them:
+- HV_CC_LC_neg.trans.csv: The raw data file has been modified (transposed and normalized)
+- clinical_data_HV_CC_LC.csv: The description file of each sample has been renamed.

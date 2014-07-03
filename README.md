@@ -42,4 +42,17 @@ The loading process is as follows:
 source("path/to/the/project/src/R/AccuracyPlusFS.R")
 
 
+Results
+-------
 
+Once the project is executed, you'll see the following results at the screen:
+
+- **INITIALIZATION PROCESS**: We load all the information and merge it into a single file.
+- **CREATING DATA SETS**: We create the train and test data sets. The splitting of the data is made randomly.
+- **Analyze the data accuracy for the 70/30 model**: We train the classifier, classify the test data set and generate the diagnostic accuracy data, which includes the plotting of the ROC curve.
+- **ANALYZING ACCURACY FOR DIFFERENT AMOUNTS OF MEASUREMENTS**: We show the accuracy for 4 different sizes of features. Such features aren't got randomly. 
+- **ANALYZING ACCURACY OF GENDER**: Analyze the classification by gender.
+- **ANALYZING ACCURACY OF AGE**: Analyze the classification by age. This calculation won't be able to be done. If both test and train set don't have the same classes identified,the calculation of the confusionMatrix won't be able to be executed.
+- **ANALYZING ACCURACY OF HISTOLOGY**: Analyze the classification by histology. This calculation won't be able to be done. If both test and train set don't have the same classes identified,the calculation of the confusionMatrix won't be able to be executed.
+- **ANALYZING ACCURACY OF STAGE**: Analyze the classification by stage. This calculation won't be able to be done. If both test and train set don't have the same classes identified,the calculation of the confusionMatrix won't be able to be executed.
+- **IDENTIFY THE 20 BEST MEASUREMENTS**: The 20 best measurements or features are calculated and ploted into files at /tmp.

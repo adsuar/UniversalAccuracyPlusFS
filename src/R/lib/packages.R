@@ -10,3 +10,6 @@ install.packages("caret")
 # Install package for rfe backwards selection function (though rfe is from
 # caret package, this package is a dependency)
 install.packages("kernlab")
+
+# Install packages for using the roc and auc functions.
+install.packages("pROC")

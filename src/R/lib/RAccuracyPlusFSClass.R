@@ -115,6 +115,13 @@ printDiagnosticAccuracyData <- function() {
       printMessage("\t\tPPV: ",diagnosticAccuracy.matrix[i,3],"\n")
       printMessage("\t\tNPV: ",diagnosticAccuracy.matrix[i,4],"\n\n")
    }
+   
+   
+   printMessage("\n\tCURVE PLOTTING WITH THE AUC INFORMATION\n\n")
+   # SHOW INFORMATION ABOUT THE AUC FOR A THREE-CLASS ENVIRONMENT
+   printROC(dataset.multiclassroc)
+   # PLOTTING IN A TWO-CLASS ENVIRONMENT
+   plot.roc(dataset.result,dataset.test[,class.position], main="ROC CURVE")
 }
 
 # Function that will execute a certain analysis of the accuracy of a given
@@ -133,6 +140,9 @@ analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
    result <- classifyEntries(trainer,dataset.test[,columnsTest])
    # 3) Generate the diagnostic accuracy data
    generateDiagnosticAccuracyData(result,dataset.test[,class.position])
+   assign("dataset.result",result,envir = .GlobalEnv)
+   assign("dataset.multiclassroc",multiclass.roc(dataset.result,dataset.test[,class.position]),envir = .GlobalEnv)
+
    # 4) Print the results
    if(analysis == 0) {
       printDiagnosticAccuracyData()
@@ -150,6 +160,7 @@ getBestVariables <- function() {
    library(kernlab)
    
    RFE <- rfe(x=dataset.merged[,10:5521], y = dataset.merged[,9], rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE, sizes=(1:30))
+   #RFE <- rfe(x=dataset.merged[,10:200], y = dataset.merged[,9], rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE, sizes=(1:30))
    
    # Creation of a canvas in which we will be able to print the
    # different plots if we want to show the result at the screen.

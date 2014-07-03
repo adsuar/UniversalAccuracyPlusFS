@@ -21,3 +21,9 @@ printMessage <- function(...) {
 printMatrix <- function(...) {
    if(printMessages) print(...)
 }
+
+# Function that prints a ROC if the configuration variable printMessages
+# is set to TRUE
+printROC <- function(...) {
+   if(printMessages) print(...)
+}

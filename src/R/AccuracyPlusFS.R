@@ -67,7 +67,7 @@ printMessage ("\n\nANALYZING ACCURACY FOR GENDER\n")
 printMessage ("=============================\n\n")
 class.position <- 4
 class.size <- 2
-analyzeDataAccuracy(0,0)
+#analyzeDataAccuracy(0,0)
 
 printMessage ("\n\nANALYZING ACCURACY FOR AGE\n")
 printMessage ("==========================\n\n")
@@ -100,6 +100,9 @@ class.size <- 13
 # If both test and train set don't have the same classes identified,the 
 # calculation of the confusionMatrix won't be able to be executed.
 #analyzeDataAccuracy(0,0)
+
+class.position <- class.position.old
+class.size <- class.size.old
 
 # IDENTIFICATION OF THE BEST 20 FEATURES
 RFE <- getBestVariables()

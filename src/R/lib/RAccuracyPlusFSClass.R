@@ -175,5 +175,8 @@ getBestVariables <- function() {
       }
    }
    
+   
+   printMessage ("\n\nAll the plots has been stored at the /tmp folder, with the boxplot_n prefix.\n")
+   
    return (RFE)
 }

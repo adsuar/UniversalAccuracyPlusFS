@@ -10,5 +10,36 @@ In **resources/R/packages.R** we can find the different packages that we need to
 
 - *e1071* package (so we can invoke the NaiveBayes or the SVM classifier)
 - *caret* package (so we can get sensitivity, specificity, etc.)
+- *kernlab* package (so we can use the RFE backwards selection function)
+- *pROC* package (so we can use the roc functions)
+
+Parametrization
+---------------
+
+You can find at **src/R/config/properties.R** the different properties you can set to customize your project.
+
+At **src/R/AccuracyPlusFS.R** you can modify too an important parameter, **baseFolder** that points to the base folder of the project.
+
+Data Preprocessing
+------------------
+
+I've developed a routine at **tools** named **normalize.sh** that has helped me to normalize data. At the beginning I had the information as it is at **resources/client_files** and I executed two steps:
+
+a) Transform the **Clinical data_HV_CC_LC.xlsx** file into a CSV file.
+b) Normalize both files. Thus, the values of the features were normalized and the structure of HV_CC_LC_neg.csv file as modified (transposed).
+
+This step won't be executed again since at **resources/data** is the information already normalized.
+
+Execution
+---------
+
+The execution of the project is very simple. Once you've loaded R, you have to invoke the main file of our R project.
+
+Such R main file is located at **src/R/** and is named **AccuracyPlusFS.R**.
+
+The loading process is as follows:
+
+source("path/to/the/project/src/R/AccuracyPlusFS.R")
+
 
 

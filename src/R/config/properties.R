@@ -37,7 +37,7 @@ kfold.crossvalidation <- 0
 # Position at which the class is stored.
 class.position <- 9
 # Position at which the sample information starts.
-sampleInformationPosition <- 10
+class.sampleInformationPosition <- 10
 # Different classes
 class.size <- 3
 

@@ -61,6 +61,38 @@ printMessage("The accuracy of the different measurements is:\n\n")
 printMatrix(accuracyMeasurements)
 
 #Third Step -- Calculate Sensitivity, Specifitivity, PPV and NPV for Gender, Age, Histology and Stage
+class.position.old <- class.position
+class.size.old <- class.size
+printMessage ("\n\nANALYZING ACCURACY FOR GENDER\n")
+printMessage ("=============================\n\n")
+class.position <- 4
+class.size <- 2
+analyzeDataAccuracy(0,0)
+
+printMessage ("\n\nANALYZING ACCURACY FOR AGE\n")
+printMessage ("==========================\n\n")
+class.position <- 5
+class.size <- 55
+# This calculation won't be executed since due to the high number of different
+# classes regarding to the size of data, R can't calculate the confusionMatrix.
+# In my previous tests, the prediction only gets no more than 10 different ages.
+#analyzeDataAccuracy(0,0)
+
+printMessage ("\n\nANALYZING ACCURACY FOR HISTOLOGY\n")
+printMessage ("===============================\n\n")
+class.position <- 7
+class.size <- 2
+analyzeDataAccuracy(0,0)
+
+printMessage ("\n\nANALYZING ACCURACY FOR STAGE\n")
+printMessage ("===============================\n\n")
+class.position <- 8
+class.size <- 13
+# This calculation won't be executed since due to the high number of different
+# classes regarding to the size of data, R can't calculate the confusionMatrix.
+# In my previous tests, the prediction only gets no more than 4 or 5 different
+# stages. 
+#analyzeDataAccuracy(0,0)
 
 # We restore the current folder to the previous one
 setwd(initial.folder)

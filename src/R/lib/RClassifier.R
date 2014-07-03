@@ -23,7 +23,7 @@ trainClassifierSVM <- function(corpus,cPosition,kfold=0) {
    # classifier <- svm(corpus[,-cPosition],as.factor(corpus[,cPosition]))
    if(kfold == -1) kfold <- dim(corpus)[1] 
    
-   classifier <- svm(corpus[,-cPosition],as.factor(corpus[,cPosition]),type="nu-classification",nu = 0.2, cross=kfold, probability=TRUE)
+   classifier <- svm(corpus[,-cPosition],as.factor(corpus[,cPosition]),type="C-classification", cross=kfold, probability=TRUE)
    return(classifier)
 }
 

@@ -55,10 +55,10 @@ generateClassifier <- function(corpus,position,kfold=0) {
    
    
    printMessage ("\n\tTraining the SVM classifier\n\n")
-
    assign("trainer", trainClassifierSVM(corpus,position,kfold),envir = .GlobalEnv)
+   
+   #printMessage ("\n\tTraining the NB classifier\n\n")
    #assign("trainer", trainClassifierNB(corpus,position),envir = .GlobalEnv);
-   #trainer <- trainClassifierNB(corpus,position);
 }
 
 # Function that predicts to which classes belongs a new set of entries.
@@ -76,12 +76,21 @@ generateDiagnosticAccuracyData <- function(prediction,reference) {
    printMessage ("\n\nGENERATING DIAGNOSTIC ACCURACY DATA\n")
    printMessage ("===================================\n\n")
    
+   cat(prediction)
+   cat("\n\n")
+   cat(reference)
+   
    accuracyData <- confusionMatrix(prediction,reference)
    
    nData <- class.size*4
+   size <- class.size
+   if(class.size == 2) {
+      nData <- 4
+      size <- 1
+   }
    
    assign("diagnosticAccuracy.data",accuracyData,envir = .GlobalEnv)
-   assign("diagnosticAccuracy.matrix",matrix(accuracyData$byClass[1:nData],nrow=class.size,ncol=4),envir = .GlobalEnv)
+   assign("diagnosticAccuracy.matrix",matrix(accuracyData$byClass[1:nData],nrow=size,ncol=4),envir = .GlobalEnv)
    assign("diagnosticAccuracy.accuracy",accuracyData$overall[[1]],envir = .GlobalEnv)
 }
 
@@ -92,7 +101,10 @@ printDiagnosticAccuracyData <- function() {
    
    printMessage("\tThe accuracy of the prediction model is: ",diagnosticAccuracy.accuracy,"\n")
    
-   for(i in 1:class.size) {
+   size <- class.size
+   if(class.size == 2) size <- 1
+   
+   for(i in 1:size) {
       printMessage("\tClass ",i-1,":\n")
       printMessage("\t\tSensitivity: ",diagnosticAccuracy.matrix[i,1],"\n")
       printMessage("\t\tSpecificity: ",diagnosticAccuracy.matrix[i,2],"\n")
@@ -104,20 +116,23 @@ printDiagnosticAccuracyData <- function() {
 # Function that will execute a certain analysis of the accuracy of a given
 # environment
 analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
-   n <- class.position + sizeOfMeasures
+   n <- class.sampleInformationPosition + sizeOfMeasures - 1
    
    if(sizeOfMeasures <= 0) n <- dim(dataset.merged)[2]
    
+   columnsTrain <- c(class.position,class.sampleInformationPosition:n)
+   columnsTest  <- c(class.sampleInformationPosition:n)
+   
    # 1) Train Classifier
-   generateClassifier(dataset.train[,class.position:n],1,kfold.crossvalidation)
+   generateClassifier(dataset.train[,columnsTrain],1,kfold.crossvalidation)
    # 2) Execute the clasification
-   result <- classifyEntries(trainer,dataset.test[,sampleInformationPosition:n])
+   result <- classifyEntries(trainer,dataset.test[,columnsTest])
    # 3) Generate the diagnostic accuracy data
    generateDiagnosticAccuracyData(result,dataset.test[,class.position])
    # 4) Print the results
    if(analysis == 0) {
       printDiagnosticAccuracyData()
    } else if (analysis == 1) {
-      printMessage("Size ", sizeOfMeasures, " - The diagnostic accuracy is: ", diagnosticAccuracy.accuracy,"\n\n")
+      printMessage("Size ", sizeOfMeasures, " - The diagnostic accuracy is: ", diagnosticAccuracy.accuracy," for " , n , " as maximum position\n\n")
    }
 }

@@ -127,6 +127,8 @@ printDiagnosticAccuracyData <- function() {
 # Function that will execute a certain analysis of the accuracy of a given
 # environment
 analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
+   library(pROC)
+   
    n <- class.sampleInformationPosition + sizeOfMeasures - 1
    
    if(sizeOfMeasures <= 0) n <- dim(dataset.merged)[2]

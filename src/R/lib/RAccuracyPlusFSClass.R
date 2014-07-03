@@ -6,6 +6,10 @@
 initialize <- function() {
    # Import the caret package that has misc functions for training and plotting
    # classification and regression models.
+   # Dependencies -- NEED TO TEST
+   library(lattice)
+   library(ggplot2)
+
    library(caret)
 
    printMessage ("\nINITIALIZATION PROCESS\n")
@@ -76,9 +80,9 @@ generateDiagnosticAccuracyData <- function(prediction,reference) {
    printMessage ("\n\nGENERATING DIAGNOSTIC ACCURACY DATA\n")
    printMessage ("===================================\n\n")
    
-   cat(prediction)
-   cat("\n\n")
-   cat(reference)
+   #cat(prediction)
+   #cat("\n\n")
+   #cat(reference)
    
    accuracyData <- confusionMatrix(prediction,reference)
    

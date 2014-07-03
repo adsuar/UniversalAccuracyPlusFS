@@ -94,5 +94,11 @@ class.size <- 13
 # stages. 
 #analyzeDataAccuracy(0,0)
 
+# library(kernlab)
+# library(pROC)
+# RFE <- rfe(x=dataset.train[,10:5521], y = dataset.train[,9], sizes = c(1:5), rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE)
+# RFE <- rfe(x=dataset.train[,10:100], y = dataset.train[,9], rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE)
+# RFE$optVariables # Gets the variables, ordered from best to worst
+
 # We restore the current folder to the previous one
 setwd(initial.folder)

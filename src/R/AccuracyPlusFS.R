@@ -76,29 +76,33 @@ class.size <- 55
 # This calculation won't be executed since due to the high number of different
 # classes regarding to the size of data, R can't calculate the confusionMatrix.
 # In my previous tests, the prediction only gets no more than 10 different ages.
+# If both test and train set don't have the same classes identified,the 
+# calculation of the confusionMatrix won't be able to be executed.
 #analyzeDataAccuracy(0,0)
 
 printMessage ("\n\nANALYZING ACCURACY FOR HISTOLOGY\n")
 printMessage ("===============================\n\n")
 class.position <- 7
 class.size <- 2
-analyzeDataAccuracy(0,0)
+# This calculation works sometimes, depending on the creation of the train and
+# test set. If both test and train set don't have the same classes identified,
+# the calculation of the confusionMatrix won't be able to be executed.
+#analyzeDataAccuracy(0,0)
 
 printMessage ("\n\nANALYZING ACCURACY FOR STAGE\n")
-printMessage ("===============================\n\n")
+printMessage ("============================\n\n")
 class.position <- 8
 class.size <- 13
 # This calculation won't be executed since due to the high number of different
 # classes regarding to the size of data, R can't calculate the confusionMatrix.
 # In my previous tests, the prediction only gets no more than 4 or 5 different
-# stages. 
+# stages.
+# If both test and train set don't have the same classes identified,the 
+# calculation of the confusionMatrix won't be able to be executed.
 #analyzeDataAccuracy(0,0)
 
-# library(kernlab)
-# library(pROC)
-# RFE <- rfe(x=dataset.train[,10:5521], y = dataset.train[,9], sizes = c(1:5), rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE)
-# RFE <- rfe(x=dataset.train[,10:100], y = dataset.train[,9], rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE)
-# RFE$optVariables # Gets the variables, ordered from best to worst
+# IDENTIFICATION OF THE BEST 20 FEATURES
+RFE <- getBestVariables()
 
 # We restore the current folder to the previous one
 setwd(initial.folder)

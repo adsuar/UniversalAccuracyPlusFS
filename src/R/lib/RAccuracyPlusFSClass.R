@@ -140,3 +140,29 @@ analyzeDataAccuracy <- function(sizeOfMeasures,analysis=0) {
       printMessage("Size ", sizeOfMeasures, " - The diagnostic accuracy is: ", diagnosticAccuracy.accuracy," for " , n , " as maximum position\n\n")
    }
 }
+
+# Function that gets the 20 best variables and shows a graph for each one
+# versus the class associated, using the boxplot model.
+getBestVariables <- function() {
+   printMessage ("\n\nIDENTIFY THE BEST 20 MEASUREMENTS\n")
+   printMessage ("=================================\n\n")
+   
+   library(kernlab)
+   
+   RFE <- rfe(x=dataset.merged[,10:5521], y = dataset.merged[,9], rfeControl= rfeControl(functions = caretFuncs,number = 2),method = "svmRadial",fit = FALSE, sizes=(1:30))
+   
+   # Creation of a canvas in which we will be able to print the
+   # different plots if we want to show the result at the screen.
+   # par(mfrow=c(5,4))
+   
+   for(i in 1:20) {
+      if(i <= length(RFE$optVariables)) {
+         fileName <- concat("/tmp/boxplot_n_",i,"_",RFE$optVariables[i],".png")
+         png(filename=fileName,width=480,height=480,units="px",pointsize=12,bg="white")
+         boxplot(dataset.merged[,RFE$optVariables[i]] ~ Label,dataset.merged[,c("Label",RFE$optVariables[i])],main=RFE$optVariables[i], type="1")
+         dev.off()
+      }
+   }
+   
+   return (RFE)
+}

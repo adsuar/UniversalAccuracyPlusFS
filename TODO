@@ -1,0 +1,3 @@
+- Include parametrization for plotting.
+- Include error management. If the prediction and the reference of a classification aren't incompatibles, instead of generating an error (and the whole process stops) we should identify the situation and don't execute the calculation of the confusionMatrix.
+- Review the execution of the multiclass.roc and plot.roc functions since I've seen some sporadic errors. The fact that two-in-a-row executions of the project generate different train and test data set make difficult to trace to error.
